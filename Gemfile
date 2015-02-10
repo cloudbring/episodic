@@ -22,10 +22,12 @@ gem 'jquery-rails'
 ## Turbolinks removed
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 ## jbuilder removed
-
-#ADDED
 # Templates for angular-rails. Creates the views that angular uses.
-gem 'angular-rails-templates'
+# gem 'angular-rails-templates'
+
+# ADDED
+# Acts as votable allows any model to be voted on, like/dislike, upvote/downvote, etc.
+gem 'acts_as_votable', '~> 0.10.0'
 # Serializers describe which attributes and relationships should be serialized
 gem 'active_model_serializers'
 # bcrypt is a key derivation function for passwords, or simply a password maker
