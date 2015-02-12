@@ -26,6 +26,11 @@ gem 'jquery-rails'
 # gem 'angular-rails-templates'
 
 # ADDED
+
+# Oauth Gem
+gem 'oauth2'
+# HTTParty gem
+gem 'httparty'
 # Acts as votable allows any model to be voted on, like/dislike, upvote/downvote, etc.
 gem 'acts_as_votable', '~> 0.10.0'
 # Serializers describe which attributes and relationships should be serialized
