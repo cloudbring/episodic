@@ -37,4 +37,5 @@ class TrakttvController < ApplicationController
     result = token.get("https://api-v2launch.trakt.tv/shows/trending", headers: HEADERS).parsed
     render json: result
   end
+
 end
