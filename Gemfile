@@ -28,7 +28,7 @@ gem 'jquery-rails'
 # ADDED
 
 # Better Errors
-gem 'better_errors'
+gem 'better_errors', '~>2.1.1'
 # Some stuff
 gem 'binding_of_caller'
 # Oauth Gem
