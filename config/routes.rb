@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root 'trakttv#find'
   get '/api' => 'trakttv#api'
   get '/get_token' => 'trakttv#get_token'
   get '/get_trending' => 'trakttv#get_trending'

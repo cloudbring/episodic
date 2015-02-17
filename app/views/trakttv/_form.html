@@ -1,0 +1,5 @@
+<%= form_tag({controller: "trakttv", action: "search"}, method: "get", class: "_form") %>
+  <%= label_tag(:q, "Search:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+
