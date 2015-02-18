@@ -31,4 +31,3 @@ class TvshowsController < ApplicationController
       format.json { render json: @tvshow}    
   end
 end
-end
