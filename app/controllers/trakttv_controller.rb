@@ -30,22 +30,4 @@ class TrakttvController < ApplicationController
 
     render json: [ result.code, result.body, result.headers.inspect].inspect
   end
-
-  def get_trending
-    client = OAuth2::Client.new(CLIENT_ID, CLIENT_SECRET, :site => 'http://localhost:3000')
-    token = OAuth2::AccessToken.new(client, ACCESS_TOKEN)
-    result = token.get("https://api-v2launch.trakt.tv/shows/trending", headers: HEADERS).parsed
-    render json: result
-  end
-
-  def search
-    search_phrase = URI.encode(params[:q])
-    client = OAuth2::Client.new(CLIENT_ID, CLIENT_SECRET, :site => 'http://localhost:3000')
-    token = OAuth2::AccessToken.new(client, ACCESS_TOKEN)
-    result = token.get("https://api-v2launch.trakt.tv/search?query=#{search_phrase}", headers: HEADERS).parsed
-    render json: result
-  end
-
-  def find   
-  end
 end
