@@ -16,10 +16,6 @@ RSpec.describe Tvshow, type: :model do
       expect(tvshow.poster_image).to eq("https://walter.trakt.us/images/shows/000/001/426/posters/medium/749eeff986.jpg")
     end
   end
-
-
-
-  
 end
 
 
