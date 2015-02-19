@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   resources :tvshows
-  
+
   root 'trakttv#new'
-  get '/api' => 'trakttv#api'
-  get '/get_token' => 'trakttv#get_token'
+  get '/api'          => 'trakttv#api'
+  get '/get_token'    => 'trakttv#get_token'
   get '/get_trending' => 'trakttv#get_trending'
-  get '/search' => 'trakttv#search'
-  
+  get '/search'       => 'trakttv#search'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

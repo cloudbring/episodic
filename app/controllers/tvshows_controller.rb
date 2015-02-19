@@ -2,7 +2,6 @@ class TvshowsController < ApplicationController
   def index
     @tvshows = Tvshow.all
   end
-
   def show
     @tvshows = Tvshow.all
   end
