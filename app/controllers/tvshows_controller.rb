@@ -33,6 +33,6 @@ class TvshowsController < ApplicationController
   private
 
   def tvshow_params
-    params.require(:tvshow).permit(:title, :trakd_id)    
+    params.require(:tvshow).permit(:title, :trakd_id)
   end
 end

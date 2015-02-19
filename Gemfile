@@ -75,7 +75,7 @@ group :development, :test do
 
   # Record HTTP Requests for tests
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', require: false
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

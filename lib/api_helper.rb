@@ -9,22 +9,16 @@ class ApiHelper
     end
   end
 
-  private
-
-  def save_or_update_show!(show)
-    #t.string   "title"
-    #t.string   "poster_image"
-    #t.integer  "trakt_id"
-    tv_show = TVShow.find_or_initalize_by_trakt_id(show['ids']['trakt_id'])
-    tv_show.update_attributes(
-      :title => show['title'],
-      :poster_image => get_best_show_image(show['images']),
-      :trakt_id => show['ids']['trackt']
-    )
-    tv_show.save!
+  def self.get_tvshows(results)
+    if(results != nil && results.class == 'Array')
+      results
+        .select { |result| result['type'] == 'show' }
+    end
   end
 
-  def get_best_show_image(images)
-    images['medium']
+  def self.get_search_result_ids(results)
+      # Only get TV Shows
+      # Get an Array<Int> of Trakt_ids
   end
+
 end
