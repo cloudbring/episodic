@@ -20,4 +20,3 @@ RSpec.describe Tvshow, type: :model do
   end
 end
 
-
