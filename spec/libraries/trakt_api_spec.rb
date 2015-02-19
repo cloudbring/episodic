@@ -3,7 +3,7 @@ require 'trakt_api'
 require 'api_helper'
 
 VCR.use_cassette('TraktAPI') do
-  RSpec.describe 'TraktApiHelper' do
+  RSpec.describe Tvshow do
 
     before do
       @@api = TraktApi.new
@@ -16,9 +16,12 @@ VCR.use_cassette('TraktAPI') do
     end
 
     context 'for a TV Show' do
-      #it 'should create a TVShow record' do
+      it 'should create a Tvshow record' do
+        expect(Tvshow.all.count).to be >= 1
+      end
+      #it 'should create a Synopsis' do
+        #expect(Synopsis.all.count).to be >= 1
       #end
-      #it 'should create a Synopsis'
     end
 
     context 'for an Episode' do
