@@ -58,18 +58,36 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Factory Girl for tests
-  gem 'factory_girl'
-  gem 'factory_girl_rails'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'byebug'
   # Rspec for running tests
   gem 'rspec', '~> 3.2.0'
   gem 'rspec-rails'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  # gem 'web-console', '~> 2.0'
+  gem 'database_cleaner'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Shoulda
+  gem 'shoulda-matchers', require: false
+
+  # Factory Girl for tests
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Record HTTP Requests for tests
+  gem 'vcr'
+  gem 'webmock'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen'
+
+  # Guard for Autorunning Tests
+  gem 'guard-rspec', require: false
+  gem 'rb-fsevent' if `uname` =~ /Darwin/
 end
 
