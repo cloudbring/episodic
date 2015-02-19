@@ -120,12 +120,58 @@
 #    }
 #}]
 
-FactoryGirl.define do
-  factory :search_result, class: Object do
-    skip_create
+#FactoryGirl.define do
+  #factory :trakt_search_results, class: Object do
+    #skip_create
 
     #ignore do
-      #response  
+      #number_of_shows 5
     #end
-  end
-end
+
+
+    #trait :with_shows do
+
+      #after :create do |search_results, evaluator|
+        #FactoryGirl.create_list :trakt_show,
+          #evaluator.number_of_shows,
+          #:search_results => search_results
+      #end
+    #end
+  #end
+
+
+  #factory :trakt_show, class: Object do
+    #skip_create
+
+    ##itypey 'show'
+    ##score 1.7767034
+
+    #show_json = {
+      #"title" => "The Gregory Hines Show",
+      #"overview" => "Welcome to The Gregory Hines Show guide. 'Gregory Hines, star of stage, screen, and television, makes his television series debut as Ben Stevenson, a widower who has been mother, father, and confidant to his 12-year-old son, Matty since his wife's death a year-and-a-half ago. Now, even Ben has to admit that it's time to resume a social life. As he eases back into dating, he finds he has as much to relearn about women as Matty is learning for the first time. Contributing plenty of advice are Ben's brother, Carl, and his dad, James, as well as his publishing house co-worker Alex, Alex's ex-wife, Nicole, and their assistant, Angela. This process proves even more awkward than necessary, since the modest Ben, with his offbeat wit, has no idea how attractive he is to women. For Ben and Matty, who have never had trouble talking openly about anything, now even the simplest conversation has become complicated - especially when the topic is the women in their lives.'' (CBS press release)",
+      #"year" => 1997,
+      #"images" => {
+        #"poster" => {
+            #"full" => nil,
+            #"medium" => nil,
+            #"thumb" => nil
+        #},
+        #"fanart" => {
+            #"full" => nil,
+            #"medium" => nil,
+            #"thumb" => nil
+        #}
+      #},
+      #"ids" => {
+        #"trakt" => 32416,
+        #"slug" => "the-gregory-hines-show",
+        #"tvdb" => 73583,
+        #"imdb" => "tt0118329",
+        #"tmdb" => 32556,
+        #"tvrage" => nil
+      #}
+    #}
+
+    #show show_json
+  #end
+#end

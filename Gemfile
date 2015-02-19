@@ -64,7 +64,7 @@ group :development, :test do
   gem 'database_cleaner'
 
   # Shoulda
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers'
 
   # Factory Girl for tests
   gem 'factory_girl'
@@ -88,6 +88,7 @@ group :development, :test do
 
   # Guard for Autorunning Tests
   gem 'guard-rspec', require: false
+  gem 'rspec-legacy_formatters'
   gem 'rb-fsevent' if `uname` =~ /Darwin/
 end
 
