@@ -49,13 +49,17 @@ class TrakttvController < ApplicationController
   def save_or_update_show!(show)
     tv_id = show['ids']['trakt']
     tv_show = Tvshow.find_or_initialize_by(trakt_record: tv_id)
+    @@api.hydrate_tvshow(tv_show) if !tv_show.filled?
     tv_show.update_attributes(
       :title => show['title'],
       :poster_image => get_best_show_image(show['images']),
       :trakt_record => tv_id
     )
+    synopsis = Synopsis.new(official: show['overview'])
+    tv_show.synopsis = synopsis
     tv_show.save!
   end
+
 
   def get_best_show_image(images)
     images['poster']['thumb'] || images['fanart']['thumb']
