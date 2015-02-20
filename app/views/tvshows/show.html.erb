@@ -1,26 +1,24 @@
-show.html.erb
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th>Poster</th>
-    <th></th>
-    <th></th>
-  </tr>
- 
-<% @tvshows.each do |tvshow| %>
-  <tr>
-    <td><%= tvshow.title %></td>
-    <td><% tvshow.trakt_id %></td>
-    <td><%= tvshow.poster_image%></td>
-    <td><%= link_to "Show", tvshow %></td>
-    <td><%= link_to "Edit", edit_tvshow_path(tvshow) %></td>
-    <td><%= link_to "Remove", tvshow, method: :delete, data: { confirm: "Are you sure?" } %></td>
-  </tr>
-<% end %>
-</table>
- 
-<br>
- 
-<%= link_to "New tvshow", new_tvshow_path %>
+<section class="row">
+    <header class="col-xs-12"><h1><%= @tvshow.title %></h1></header>
+    <aside class="col-xs-6">
+        <%# Have the form take up the right half %>
+        <%# POSTER GOES HERE %>
+        <%= image_tag @tvshow.poster_image %>
+    </aside>
+    <div class="col-xs-6">
+        <%# TVSHOW INFO GOES HERE %>
+        <%= render 'tvshow_info' %>
+        <%# Have the form take up the right half %>
+        <%#= semantic_form_for @tvshow  do |f| %>
+            <%#= f.semantic_fields_for :synopsis do |s| %>
+                <%#= s.semantic_fields_for :rewrites, @tvshow.synopsis.rewrites.each do |r| %>
+                    <%#= r.inputs do %>
+                        <%#= r.input :body %>
+                    <%# end %>
+                    <%#= r.actions %>
+                <%# end %>
+            <%# end %>
+            <%#=  console %>
+        <%# end %>
+    </div>
+</section>

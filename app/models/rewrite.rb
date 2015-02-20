@@ -1,4 +1,3 @@
 class Rewrite < ActiveRecord::Base
-
-  belongs_to :tvshow 
+  belongs_to :tvshow
 end

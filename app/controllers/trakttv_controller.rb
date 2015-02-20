@@ -8,7 +8,16 @@ class TrakttvController < ApplicationController
   end
 
   def get_trending
-   render json: @@api.get_trending
+    @trending = @@api.get_trending
+    @ids = @trending
+        .select  { |result| result['type'] == 'show'  }
+        .collect { |result| result['show']['ids']['trakt'] }
+
+    @trending
+        .select { |result| result['type'] = 'show'  }
+        .each   { |result| save_or_update_show!(result['show']) }
+
+    render :get_trending
   end
 
   def api

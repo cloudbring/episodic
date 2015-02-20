@@ -6,23 +6,58 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+ruby '2.1.3'
 
 * System dependencies
+gem 'rails', '4.2.0'
+# Use postgresql as the database for Active Record
+gem 'pg'
+gem 'bootstrap-sass', '~> 3.3.3'
+# Better Errors
+gem 'better_errors', '~>2.1.1'
+# The binding_of_caller gem provides the Binding#of_caller method.
+Using binding_of_caller we can grab bindings from higher up the call stack and evaluate code in that context.
+gem 'binding_of_caller'
+gem 'oauth2'
+gem 'httparty'
+# Acts as votable allows any model to be voted on, like/dislike, upvote/downvote, etc.
+gem 'acts_as_votable', '~> 0.10.0'
+# Bower is a package manager for Javascript libraries that allows you to define,
+# version, and retrieve your dependencies. Rails is a package or gem that allows you
+# to use bower with rails
+gem 'bower-rails'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'formtastic-bootstrap', '>= 3.0.0'
+group :development, :test do
+  # Rspec for running tests
+  gem 'rspec', '~> 3.2.0'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  
+  # Shoulda
+  gem 'shoulda-matchers'
+  
+  # Factory Girl for tests
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
 
-* Configuration
+  # Record HTTP Requests for tests
+  gem 'vcr'
+  gem 'webmock', require: false
 
-* Database creation
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 
-* Database initialization
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen'
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+  # Guard for Autorunning Tests
+  gem 'guard-rspec', require: false
+  gem 'rspec-legacy_formatters'
+  gem 'rb-fsevent' if `uname` =~ /Darwin/

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :tvshows
 
-  root 'trakttv#new'
+  root 'trakttv#search', q: "The Good Wife"
   get '/api'          => 'trakttv#api'
   get '/get_token'    => 'trakttv#get_token'
   get '/get_trending' => 'trakttv#get_trending'
