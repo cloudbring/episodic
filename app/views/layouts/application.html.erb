@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Episodic</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<!-- <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>   -->
+<body onLoad="document.forms._form.form_field.focus()">
+  <%= render "nav" %>  
 
-<%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
+  
 
+
+ 
 </body>
 </html>
