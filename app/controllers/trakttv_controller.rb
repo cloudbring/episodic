@@ -11,6 +11,17 @@ class TrakttvController < ApplicationController
    render json: @@api.get_trending
   end
 
+  def api
+    response.headers["Content-Type"] = "application/json"
+    response.headers["trakt-api-key"] = "8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6"
+    response.headers["trakt-api-version"] = "2"
+    redirect_to "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6&redirect_uri=urn:ietf:wg:oauth:2.0:oob&state=state&username=kenyacode"
+  end
+
+  def get_token
+    @@api.get_token
+  end
+
   def search
     @results = @@api.search(params[:q])
 
