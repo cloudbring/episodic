@@ -13,6 +13,7 @@ class TraktApi
   TRAKT_HOST     = "https://api-v2launch.trakt.tv"
   TRAKT_TRENDING = TRAKT_HOST + "/shows/trending"
   TRAKT_SEARCH   = TRAKT_HOST + "/search"
+  TRAKT_SHOW     = TRAKT_HOST + "/shows/" # Must add #{trakt_id} after it
 
   def initialize(id = CLIENT_ID, secret = CLIENT_SECRET)
     client = OAuth2::Client.new(
@@ -21,7 +22,7 @@ class TraktApi
       :site => 'http://localhost:3000')
     @@token = OAuth2::AccessToken.new(client, ACCESS_TOKEN)
   end
-  
+
   # def api
   #   response.headers["Content-Type"] = "application/json"
   #   response.headers["trakt-api-key"] = "8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6"
@@ -46,7 +47,38 @@ class TraktApi
 
     [ result.code, result.body, result.headers.inspect].inspect
   end
-  
+
+  def get_show(trakt_id)
+    @@token.get(TRAKT_SHOW + "#{trakt_id}?extended=full", headers: HEADERS).parsed
+  end
+
+  def hydrate_tvshow(tv_show)
+    api_show = @@token.get(TRAKT_SHOW + "#{tv_show.trakt_record}?extended=full", headers: HEADERS).parsed
+    #api_show = get_show()
+    # api_show is JSON response that will map to Tvshow Record
+    #attributes = { :airs_day => api_show['airs']['day'],
+      #:airs_time => api_show['airs']['time'],
+      #:airs_timezone => api_show['airs']['timezone'],
+      #:runtime => api_show['runtime'],
+      #:certification => api_show['certification'],
+      #:network => api_show['network'],
+      #:status => api_show['status'],
+      #:aired_episodes => api_show['aired_episodes']
+    #}
+    attributes = {}
+    attributes[:airs_time]      = api_show['airs']['time']
+    attributes[:airs_timezone]  = api_show['airs']['timezone']
+    attributes[:runtime]        = api_show['runtime']
+    attributes[:certification]  = api_show['certification']
+    attributes[:network]        = api_show['network']
+    attributes[:status]         = api_show['status']
+    attributes[:aired_episodes] = api_show['aired_episodes']
+
+    # "airs_day", "airs_time", "airs_timezone" "runtime" "certification" "network" "status" "aired_episodes"
+    tv_show.update_attributes(attributes)
+  end
+
+
   def get_trending
     @@token.get(TRAKT_TRENDING, headers: HEADERS).parsed
   end
