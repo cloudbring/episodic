@@ -2,8 +2,9 @@ class TvshowsController < ApplicationController
   def index
     @tvshows = Tvshow.all
   end
+
   def show
-    @tvshows = Tvshow.all
+    @tvshow = Tvshow.find(params[:id])
   end
 
   def new
@@ -13,7 +14,7 @@ class TvshowsController < ApplicationController
     else
       render :new
     # respond_to do |format|
-    #   format.json { render json: @tvshow}    
+    #   format.json { render json: @tvshow}
     end
   end
 
@@ -29,10 +30,36 @@ class TvshowsController < ApplicationController
     end
   end
 
+  def update
+      @tvshow = Tvshow.find(params[:id])
+      if @tvshow.update_attributes(tvshow_params)
+         redirect_to :action => 'show', :id => @tvshow
+      else
+         render :action => 'edit'
+      end
+   end
 
   private
 
   def tvshow_params
-    params.require(:tvshow).permit(:title, :trakd_id)
+    #params.require(:tvshow).permit(:title,
+                                   #:trakt_record,
+                                   #synopsis: [:official,
+                                              #:rewrite]
+                                  #)
+    #params.require(:tvshow).permit!
+    params.permit!
+    #params.permit( :tvshow,
+                   #{
+                     #:id => [],
+                     #:title => [],
+                     #:trakt_record => [],
+                     #:synopsis =>
+                     #{
+                       #:official => [],
+                       #:rewrites => [:body]
+                     #}
+                   #}
+                 #)
   end
 end

@@ -9,6 +9,7 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
+ *= require formtastic-bootstrap
  */
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
@@ -16,6 +17,12 @@ $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 
-.socials {  
-padding: 10px;  
-} 
+.socials {
+    padding: 10px;
+}
+
+a > img {
+    max-width:100%;
+    max-height:100%;
+}
+

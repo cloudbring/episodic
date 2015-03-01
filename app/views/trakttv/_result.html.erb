@@ -1,13 +1,15 @@
-<div class="container">
   <div class="row">
     <div class="col-xs-6">
-      <img src="<%= result.poster_image %>">
+        <a href="<%= tvshow_path(result.id) %>">
+            <img src="<%= result.poster_image %>">
+        </a>
     </div>
     <div class="col-xs-6">
-      <h4><%= result.title %></h4>
+        <h4>
+            <%= link_to result.title, tvshow_path(result.id) %>
+        </h4>
     </div>
-  </div>  
-</div>
+  </div>
 
 
 
