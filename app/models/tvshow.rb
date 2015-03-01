@@ -1,10 +1,8 @@
 class Tvshow < ActiveRecord::Base
   #attr_accessor :synopsis, :rewrites
   validates :trakt_record, presence: true, uniqueness: true
-  has_one :synopsis, :dependent => :destroy
-  has_many :rewrites, through: :synopsis, :dependent => :destroy
+  has_many :rewrites, :dependent => :destroy
 
-  accepts_nested_attributes_for :synopsis
   accepts_nested_attributes_for :rewrites
 
   def filled?

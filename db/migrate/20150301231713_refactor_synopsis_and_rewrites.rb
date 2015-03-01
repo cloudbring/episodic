@@ -5,6 +5,7 @@ class RefactorSynopsisAndRewrites < ActiveRecord::Migration
   end
   
   def down
-    drop_table :rewrites
+    remove_column :synopsis_id, :integer
+    drop_table :synopses
   end
 end
