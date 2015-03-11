@@ -1,0 +1,13 @@
+<section class="row">
+    <h2>Top Tv Shows</h2>
+    <table>
+      <tr>
+        <th>Title</th>
+      </tr>
+    <% @trending_results.each do |tvshow| %>
+      <tr>
+        <td><%= link_to tvshow.title, tvshow_path(tvshow.id) %></td>
+      </tr>
+    <% end %>
+    </table>
+</section>

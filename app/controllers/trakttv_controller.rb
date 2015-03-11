@@ -10,13 +10,12 @@ class TrakttvController < ApplicationController
   def get_trending
     @trending = @@api.get_trending
     @ids = @trending
-        .select  { |result| result['type'] == 'show'  }
         .collect { |result| result['show']['ids']['trakt'] }
 
     @trending
-        .select { |result| result['type'] = 'show'  }
-        .each   { |result| save_or_update_show!(result['show']) }
+        .each   { |result| save_or_update_show_for_get_trending!(result['show']) }
 
+    @trending_results = Tvshow.where(trakt_record: @ids)
     render :get_trending
   end
 
@@ -69,5 +68,14 @@ class TrakttvController < ApplicationController
 
   def get_best_show_image(images)
     images['poster']['thumb'] || images['fanart']['thumb']
+  end
+
+  def save_or_update_show_for_get_trending!(show)
+    trakt_id = show['ids']['trakt']
+    tv_show = Tvshow.find_or_initialize_by(trakt_record: trakt_id)
+    @@api.hydrate_tvshow(tv_show) if !tv_show.filled?
+    tv_show.update_attributes(
+      :title => show['title'],
+      :trakt_record => trakt_id)
   end
 end

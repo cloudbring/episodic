@@ -48,17 +48,24 @@ class TraktApi
   def hydrate_tvshow(tv_show)
     api_show = @@token.get(TRAKT_SHOW + "#{tv_show.trakt_record}?extended=full", headers: HEADERS).parsed
     attributes = {}
-    attributes[:airs_time]      = api_show['airs']['time']
-    attributes[:airs_timezone]  = api_show['airs']['timezone']
-    attributes[:runtime]        = api_show['runtime']
-    attributes[:certification]  = api_show['certification']
-    attributes[:network]        = api_show['network']
-    attributes[:status]         = api_show['status']
-    attributes[:aired_episodes] = api_show['aired_episodes']
+    attributes[:airs_time]          = api_show['airs']['time']
+    attributes[:airs_timezone]      = api_show['airs']['timezone']
+    attributes[:runtime]            = api_show['runtime']
+    attributes[:certification]      = api_show['certification']
+    attributes[:network]            = api_show['network']
+    attributes[:status]             = api_show['status']
+    attributes[:aired_episodes]     = api_show['aired_episodes']
+    attributes[:title]              = api_show['title']
+    attributes[:poster_image]       = get_best_show_image(api_show['images']) unless api_show['images'].nil?
+    attributes[:trakt_record]       = api_show['trakt_id']
+    attributes[:official_synopsis]  = api_show['overview']
 
     tv_show.update_attributes(attributes)
   end
 
+  def get_best_show_image(images)
+    images['poster']['thumb'] || images['fanart']['thumb']
+  end
 
   def get_trending
     @@token.get(TRAKT_TRENDING, headers: HEADERS).parsed
