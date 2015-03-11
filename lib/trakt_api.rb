@@ -3,7 +3,7 @@ class TraktApi
 
   CLIENT_ID     = "8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6"
   CLIENT_SECRET = "de1daaeb52ea16099e68cb5d35cc22201e444910054bdec3d54025ad4c8575e7"
-  ACCESS_TOKEN  = "0bb2cd99a0c5ea1a73ac86aab7b86b3dfad348600e9aa94f696931e3c334fe8e"
+  ACCESS_TOKEN  = "5ddc58ff493e8b741fd223f9e5b54e4bfac1e652234579a9808a082d26903bbf"
   HEADERS =
     {
       "Content-Type" => "application/json",
@@ -22,13 +22,6 @@ class TraktApi
       :site => 'http://localhost:3000')
     @@token = OAuth2::AccessToken.new(client, ACCESS_TOKEN)
   end
-
-  # def api
-  #   response.headers["Content-Type"] = "application/json"
-  #   response.headers["trakt-api-key"] = "8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6"
-  #   response.headers["trakt-api-version"] = "2"
-  #   redirect_to "https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=8988fc41d4c1491a0c0fb9199538b1a9a2e1cbeebd70ae762a5bfb5b9c35aea6&redirect_uri=urn:ietf:wg:oauth:2.0:oob&state=state&username=kenyacode"
-  # end
 
   def get_token
     headers = {}
@@ -54,17 +47,6 @@ class TraktApi
 
   def hydrate_tvshow(tv_show)
     api_show = @@token.get(TRAKT_SHOW + "#{tv_show.trakt_record}?extended=full", headers: HEADERS).parsed
-    #api_show = get_show()
-    # api_show is JSON response that will map to Tvshow Record
-    #attributes = { :airs_day => api_show['airs']['day'],
-      #:airs_time => api_show['airs']['time'],
-      #:airs_timezone => api_show['airs']['timezone'],
-      #:runtime => api_show['runtime'],
-      #:certification => api_show['certification'],
-      #:network => api_show['network'],
-      #:status => api_show['status'],
-      #:aired_episodes => api_show['aired_episodes']
-    #}
     attributes = {}
     attributes[:airs_time]      = api_show['airs']['time']
     attributes[:airs_timezone]  = api_show['airs']['timezone']
@@ -74,7 +56,6 @@ class TraktApi
     attributes[:status]         = api_show['status']
     attributes[:aired_episodes] = api_show['aired_episodes']
 
-    # "airs_day", "airs_time", "airs_timezone" "runtime" "certification" "network" "status" "aired_episodes"
     tv_show.update_attributes(attributes)
   end
 
@@ -85,7 +66,6 @@ class TraktApi
 
   def search(query)
     search_phrase = URI.encode(query)
-    #search_phrase = URI.encode("The Good Wife")
     @@token.get(TRAKT_SEARCH + "?query=#{search_phrase}&type=show", headers: HEADERS).parsed
   end
 end

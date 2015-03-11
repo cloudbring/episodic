@@ -6,6 +6,6 @@
     <%# Airs %>
     <%= content_tag :p, raw(airs(@tvshow)) %>
     <%# Synopsis %>
-    <%= content_tag :p, raw("<h3>Official Synopsis:</h3> #{@tvshow.synopsis.official}") if @tvshow.synopsis.official -%>
+    <%= content_tag :p, raw("<h3>Official Synopsis:</h3> #{@tvshow.official_synopsis}") if @tvshow.official_synopsis -%>
 
 </div>

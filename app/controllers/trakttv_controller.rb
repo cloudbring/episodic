@@ -32,6 +32,7 @@ class TrakttvController < ApplicationController
   end
 
   def search
+  
     @results = @@api.search(params[:q])
 
     @ids = @results
@@ -39,11 +40,9 @@ class TrakttvController < ApplicationController
         .collect { |result| result['show']['ids']['trakt'] }
 
     @results
-        .select  { |result| result['type'] = 'show'  }
+        .select  { |result| result['type'] == 'show'  }
         .each { |result| save_or_update_show!(result['show']) }
 
-    #ApiHelper.add_results_to_db!(@results)
-    #@ids = ApiHelper.get_search_result_ids(@results)
     @search_results = Tvshow.where(trakt_record: @ids)
     render :search
   end
@@ -57,16 +56,14 @@ class TrakttvController < ApplicationController
 
   def save_or_update_show!(show)
     trakt_id = show['ids']['trakt']
+    synopsis = show['overview']
     tv_show = Tvshow.find_or_initialize_by(trakt_record: trakt_id)
     @@api.hydrate_tvshow(tv_show) if !tv_show.filled?
     tv_show.update_attributes(
       :title => show['title'],
       :poster_image => get_best_show_image(show['images']),
-      :trakt_record => trakt_id
-    )
-    synopsis = Synopsis.new(official: show['overview'])
-    tv_show.synopsis = synopsis
-    tv_show.save!
+      :trakt_record => trakt_id,
+      :official_synopsis => synopsis)
   end
 
 
