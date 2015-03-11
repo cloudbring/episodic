@@ -8,5 +8,6 @@ class AddFieldsToTvshow < ActiveRecord::Migration
     add_column :tvshows, :network, :string
     add_column :tvshows, :status, :string
     add_column :tvshows, :aired_episodes, :integer
+    add_column :tvshows, :synopsis, :string
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302000035) do
+ActiveRecord::Schema.define(version: 20150220100154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20150302000035) do
   end
 
   create_table "tvshows", force: :cascade do |t|
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "title"
     t.string   "poster_image"
     t.integer  "trakt_record"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150302000035) do
     t.string   "network"
     t.string   "status"
     t.integer  "aired_episodes"
-    t.string   "official_synopsis"
+    t.string   "synopsis"
   end
 
   create_table "users", force: :cascade do |t|
