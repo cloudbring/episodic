@@ -11,39 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220100154) do
+ActiveRecord::Schema.define(version: 20150312232413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rewrites", force: :cascade do |t|
     t.string   "body"
+    t.integer  "synopsis_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "synopsis_id"
+    t.string   "user_id"
   end
 
   create_table "tvshows", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "title"
     t.string   "poster_image"
     t.integer  "trakt_record"
     t.string   "airs_day"
+    t.integer  "aired_episodes"
     t.string   "airs_time"
     t.string   "airs_timezone"
-    t.integer  "runtime"
     t.string   "certification"
     t.string   "network"
+    t.string   "official_synopsis"
+    t.integer  "runtime"
     t.string   "status"
-    t.integer  "aired_episodes"
-    t.string   "synopsis"
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "username"
+    t.string   "email"
+    t.string   "password"
+    t.string   "password_digest"
   end
 
   create_table "votes", force: :cascade do |t|

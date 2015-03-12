@@ -13,8 +13,6 @@ class TvshowsController < ApplicationController
       redirect_to (@tvshow)
     else
       render :new
-    # respond_to do |format|
-    #   format.json { render json: @tvshow}
     end
   end
 
@@ -25,8 +23,6 @@ class TvshowsController < ApplicationController
       redirect_to tvshow_path
     else
       render :new
-    # respond_to do |format|
-    #   format.json { render json: @tvshow}
     end
   end
 
@@ -42,24 +38,7 @@ class TvshowsController < ApplicationController
   private
 
   def tvshow_params
-    #params.require(:tvshow).permit(:title,
-                                   #:trakt_record,
-                                   #synopsis: [:official,
-                                              #:rewrite]
-                                  #)
-    #params.require(:tvshow).permit!
-    params.permit!
-    #params.permit( :tvshow,
-                   #{
-                     #:id => [],
-                     #:title => [],
-                     #:trakt_record => [],
-                     #:synopsis =>
-                     #{
-                       #:official => [],
-                       #:rewrites => [:body]
-                     #}
-                   #}
-                 #)
+    params.require(:tvshow).permit(:airs_time, :airs_timezone, :runtime, :certification, :network, :status, 
+                                   :aired_episodes, :title, :year, :trakt_record, :official_synopsis)
   end
 end

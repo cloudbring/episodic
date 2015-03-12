@@ -31,17 +31,13 @@ class TrakttvController < ApplicationController
   end
 
   def search
-  
     @results = @@api.search(params[:q])
-
     @ids = @results
         .select  { |result| result['type'] == 'show'  }
         .collect { |result| result['show']['ids']['trakt'] }
-
     @results
         .select  { |result| result['type'] == 'show'  }
         .each { |result| save_or_update_show!(result['show']) }
-
     @search_results = Tvshow.where(trakt_record: @ids)
     render :search
   end

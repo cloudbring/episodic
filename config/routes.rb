@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :tvshows
+  resources :tvshows, only: :show
+  resources :users
   #root 'trakttv' => 'trakttv#get_trending'
   root 'trakttv#get_trending'
   get '/api'          => 'trakttv#api'

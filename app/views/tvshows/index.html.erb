@@ -1,28 +1,17 @@
-index.html.erb
 <h1>Listing tvshows</h1>
  
 <table>
   <tr>
     <th>Title</th>
-    <th></th>
     <th>Poster</th>
-    <th></th>
-    <th></th>
+    <th>Synopsis</th>
   </tr>
  
 <% @tvshows.each do |tvshow| %>
   <tr>
     <td><%= tvshow.title %></td>
-    <td><%  tvshow.trakt_id %></td>
-    <td><%= tvshow.poster_image%></td>
+    <td><%= image_tag tvshow.poster_image %></td>
     <td><%= tvshow.official_synopsis%></td>
-    <td><%= link_to "Show", tvshow %></td>
-    <td><%= link_to "Edit", edit_tvshow_path(tvshow) %></td>
-    <td><%= link_to "Remove", tvshow, method: :delete, data: { confirm: "Are you sure?" } %></td>
   </tr>
 <% end %>
 </table>
- 
-<br>
- 
-<%= link_to "New tvshow", new_tvshow_path %>
