@@ -42,6 +42,8 @@ module Episodic
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
 
+    # deploying on Heroku with Rails 3.2 only, you may want to set:
+    config.assets.initialize_on_precompile = false
   end
 end
 
