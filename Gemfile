@@ -53,6 +53,8 @@ gem 'formtastic-bootstrap', '>= 3.0.0'
 
 gem 'devise'
 
+gem 'omniauth'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
