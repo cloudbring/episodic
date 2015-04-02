@@ -35,6 +35,7 @@ class TvshowsController < ApplicationController
       end
    end
 
+
   private
 
   def tvshow_params

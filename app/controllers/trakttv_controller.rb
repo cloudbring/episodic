@@ -6,7 +6,18 @@ class TrakttvController < ApplicationController
     super
     @@api = TraktApi.new
   end
+ 
+  def get_popular
+    @popular = @@api.get_popular
+    @ids = @popular
+        .collect { |result| result['ids']['trakt'] }
+    @popular
+        .each   { |result| save_or_update_show_for_get_popular!(result['ids']) }
 
+    @popular_results = Tvshow.where(trakt_record: @ids)
+    render :get_popular
+  end
+  
   def get_trending
     @trending = @@api.get_trending
     @ids = @trending
@@ -73,5 +84,15 @@ class TrakttvController < ApplicationController
     tv_show.update_attributes(
       :title => show['title'],
       :trakt_record => trakt_id)
+  end
+
+  def save_or_update_show_for_get_popular!(ids)
+    trakt_id = ids['trakt']
+    tv_show = Tvshow.find_or_initialize_by(trakt_record: trakt_id)
+    @@api.hydrate_tvshow(tv_show) if !tv_show.filled?
+    tv_show.update_attributes(
+      :title => ids['slug'],
+      :trakt_record => ids['trakt'],
+      )
   end
 end
