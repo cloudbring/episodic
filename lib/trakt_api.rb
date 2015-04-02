@@ -14,6 +14,7 @@ class TraktApi
   TRAKT_TRENDING = TRAKT_HOST + "/shows/trending"
   TRAKT_SEARCH   = TRAKT_HOST + "/search"
   TRAKT_SHOW     = TRAKT_HOST + "/shows/" # Must add #{trakt_id} after it
+  TRAKT_POPULAR  = TRAKT_HOST + "/shows/popular"
 
   def initialize(id = CLIENT_ID, secret = CLIENT_SECRET)
     client = OAuth2::Client.new(
@@ -45,6 +46,23 @@ class TraktApi
     @@token.get(TRAKT_SHOW + "#{trakt_id}?extended=full", headers: HEADERS).parsed
   end
 
+  def get_best_show_image(images)
+    images['poster']['thumb'] || images['fanart']['thumb']
+  end
+
+  def get_trending
+    @@token.get(TRAKT_TRENDING, headers: HEADERS).parsed
+  end
+
+  def search(query)
+    search_phrase = URI.encode(query)
+    @@token.get(TRAKT_SEARCH + "?query=#{search_phrase}&type=show", headers: HEADERS).parsed
+  end
+
+  def get_popular
+    @@token.get(TRAKT_POPULAR, headers: HEADERS).parsed         
+  end
+  
   def hydrate_tvshow(tv_show)
     api_show = @@token.get(TRAKT_SHOW + "#{tv_show.trakt_record}?extended=full", headers: HEADERS).parsed
     attributes = {}
@@ -61,18 +79,5 @@ class TraktApi
     attributes[:official_synopsis]  = api_show['overview']
 
     tv_show.update_attributes(attributes)
-  end
-
-  def get_best_show_image(images)
-    images['poster']['thumb'] || images['fanart']['thumb']
-  end
-
-  def get_trending
-    @@token.get(TRAKT_TRENDING, headers: HEADERS).parsed
-  end
-
-  def search(query)
-    search_phrase = URI.encode(query)
-    @@token.get(TRAKT_SEARCH + "?query=#{search_phrase}&type=show", headers: HEADERS).parsed
   end
 end
