@@ -1,0 +1,17 @@
+<h1>Listing tvshows</h1>
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Poster</th>
+    <th>Synopsis</th>
+  </tr>
+ 
+<% @tvshows.each do |tvshow| %>
+  <tr>
+    <td><%= tvshow.title %></td>
+    <td><%= image_tag tvshow.poster_image %></td>
+    <td><%= tvshow.official_synopsis%></td>
+  </tr>
+<% end %>
+</table>

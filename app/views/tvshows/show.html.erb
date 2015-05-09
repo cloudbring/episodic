@@ -1,0 +1,13 @@
+<section class="row">
+    <header class="col-xs-12"><h1><%= @tvshow.title %></h1></header>
+    <aside class="col-xs-6">
+        <%# Have the form take up the right half %>
+        <%# POSTER GOES HERE %>
+        <%= image_tag @tvshow.poster_image %>
+    </aside>
+    <div class="col-xs-6">
+        <%# TVSHOW INFO GOES HERE %>
+        <%= render 'tvshow_info' %>
+        <%# Have the form take up the right half %>
+    </div>
+</section>
