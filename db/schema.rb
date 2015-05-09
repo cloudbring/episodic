@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508060913) do
+ActiveRecord::Schema.define(version: 20150612193430) do
+
+  create_table "rewrites", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "synopsis_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "user_id"
+  end
+
+  create_table "tvshows", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "title"
+    t.string   "poster_image"
+    t.integer  "trakt_record"
+    t.string   "airs_day"
+    t.integer  "aired_episodes"
+    t.string   "airs_time"
+    t.string   "airs_timezone"
+    t.string   "certification"
+    t.string   "network"
+    t.string   "official_synopsis"
+    t.integer  "runtime"
+    t.string   "status"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
