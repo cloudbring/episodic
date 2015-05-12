@@ -33,13 +33,12 @@ class TvshowsController < ApplicationController
       else
          render :action => 'edit'
       end
-   end
+  end
 
 
   private
 
   def tvshow_params
-    params.require(:tvshow).permit(:airs_time, :airs_timezone, :runtime, :certification, :network, :status, 
-                                   :aired_episodes, :title, :year, :trakt_record, :official_synopsis)
+    params.require(:tvshow).permit(:airs_time, :airs_timezone, :runtime, :certification, :network, :status, :aired_episodes, :title, :year, :trakt_record, :official_synopsis)
   end
 end

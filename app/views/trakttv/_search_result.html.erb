@@ -1,0 +1,12 @@
+  <div class="row">
+    <div class="col-xs-6">
+        <a href="<%= tvshow_path(search_result.id) %>">
+            <img src="<%= search_result.poster_image %>">
+        </a>
+    </div>
+    <div class="col-xs-6">
+        <h4>
+            <%= link_to search_result.title, tvshow_path(search_result.id) %>
+        </h4>
+    </div>
+  </div>

@@ -1,12 +1,12 @@
 require 'trakt_api'
-require 'api_helper'
+# require 'api_helper'
 
 class TrakttvController < ApplicationController
   def initialize
     super
     @@api = TraktApi.new
   end
- 
+
   def get_popular
     @popular = @@api.get_popular
     @ids = @popular
@@ -17,7 +17,7 @@ class TrakttvController < ApplicationController
     @popular_results = Tvshow.where(trakt_record: @ids)
     render :get_popular
   end
-  
+
   def get_trending
     @trending = @@api.get_trending
     @ids = @trending
@@ -42,7 +42,10 @@ class TrakttvController < ApplicationController
   end
 
   def search
-    @results = @@api.search(params[:q])
+    if params[:q] == nil
+        render :search
+    elsif @results = @@api.search(params[:q])
+
     @ids = @results
         .select  { |result| result['type'] == 'show'  }
         .collect { |result| result['show']['ids']['trakt'] }
@@ -50,7 +53,8 @@ class TrakttvController < ApplicationController
         .select  { |result| result['type'] == 'show'  }
         .each { |result| save_or_update_show!(result['show']) }
     @search_results = Tvshow.where(trakt_record: @ids)
-    render :search
+    render :search_result
+    end
   end
 
   private

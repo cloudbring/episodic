@@ -1,2 +1,7 @@
-<h1>Search Results</h1>
-<%= render partial: "result", collection: @search_results %>
+<h1>Search Form</h1>
+<%# render partial: "search_form" %>
+
+<%= form_tag({controller: "trakttv", action: "search"}, method: "get", class: "_form") %>
+  <%= label_tag(:q, "Search:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
